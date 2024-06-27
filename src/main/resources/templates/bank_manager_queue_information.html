@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Queue Information</title>
+</head>
+<body>
+<h1>Queue Information for Your Branch</h1>
+
+<div th:if="${queueInformation != null}">
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Branch Name</th>
+      <th>Service ID</th>
+      <th>Queue Size</th>
+      <th>Estimated Waiting Hours</th>
+      <th>Estimated Time</th>
+      <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${queueInformation.branch.bkBranchName}">Branch Name</td>
+      <td th:text="${queueInformation.service.name}">Service Name</td>
+      <td th:text="${queueInformation.queueSize}">Queue Size</td>
+      <td th:text="${queueInformation.estimatedWaitingHours}">Estimated Waiting Hours</td>
+      <td th:text="${#dates.format(queueInformation.estimatedTime, 'yyyy-MM-dd HH:mm')}">Estimated Time</td>
+      <td>
+        <form th:action="@{/manager/queue/cancel}" method="post">
+          <input type="hidden" name="queueId" th:value="${queueInformation.id}" />
+          <button type="submit">Cancel Booking</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div th:if="${queueInformation == null}">
+  <p>No queue information available for your branch.</p>
+</div>
+</body>
+</html>

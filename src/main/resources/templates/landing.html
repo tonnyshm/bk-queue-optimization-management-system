@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Branches Portal</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #ffffff; /* White background */
+        }
+        .nav-wrapper {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+        }
+        .brand-logo {
+            margin-left: 20px;
+        }
+        .btn-check-now {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+        }
+        .btn-check-now:hover {
+            background-color: #1565c0; /* Darker shade of blue on hover */
+        }
+        .footer {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+            padding: 20px 0;
+            color: #ffffff; /* White text */
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            background-image: url(''); /* Replace 'your-image-url.jpg' with the URL of your desired background image */
+            background-size: contain; /* This will make the background image cover the entire container */
+            background-position: center; /* This will center the background image within the container */
+            /* You can add more CSS properties to adjust the background image as needed */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="nav-wrapper">
+        <a th:href="@{/}" class="brand-logo">
+            <img src="/static/images/1680506194279.ico" alt="Queuequell Logo"><!-- Replace 'logo.png' with the path to your logo image -->
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/service-we-offer}">Services We Offer</a></li>
+            <li>
+                <a class="dropdown-trigger" href="#!" data-target="dropdown1">Bank Portal<i class="material-icons right"></i></a>
+            </li>
+            <li><a th:href="@{/about}">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+    <li><a th:href="@{/bank-manager/bank_manager_login}">Bank-Manager</a></li>
+    <li><a th:href="@{/admin/admin_login}">Sys-Admin</a></li>
+</ul>
+
+<!-- Main content -->
+<div class="container">
+    <br>
+    <br>
+    <h3>Queue Management System in Bank of Kigali</h3>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center> <a th:href="@{/nearby}" class="waves-effect waves-light btn btn-check-now">Check Now</a> </center>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <a th:href="@{/ratingForm}" class="waves-effect waves-light btn footer-btn">Rating</a>
+        <a th:href="@{/feedback}" class="waves-effect waves-light btn footer-btn">Feedbacks</a>
+    </div>
+</footer>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems);
+    });
+</script>
+</body>
+</html>

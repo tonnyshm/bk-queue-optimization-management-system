@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Bulk Email</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Bank Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/bank-manager/bank_manager/home}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Accounts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Bookings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/bank-manager/report}">Reports</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/bank-manager/services}">Services</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" id="logoutButton" th:href="@{/perform-logout}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="mb-4">Send Bulk Email To Users</h1>
+      <form th:action="@{/sendEmails}" method="post" th:object="${emailRequest}">
+
+        <div class="form-group">
+          <label for="timeRange">Select Time Range:</label>
+          <select class="form-control" id="timeRange" name="timeRange" th:field="*{timeRange}">
+            <option value="today">Today</option>
+            <option value="lastHour">Last Hour</option>
+            <option value="last30Min">Last 30 Minutes</option>
+            <option value="lastMonth">Last Month</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="branchId">Select Branch:</label>
+          <select class="form-control" id="branchId" name="branchId" th:field="*{branchId}">
+            <option value="">All</option>
+            <option th:each="branch : ${branches}" th:value="${branch.id}" th:text="${branch.bkBranchName}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceId">Select Service:</label>
+          <select class="form-control" id="serviceId" name="serviceId" th:field="*{serviceId}">
+            <option value="">All</option>
+            <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.name}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Email Subject:</label>
+          <input type="text" class="form-control" id="subject" name="subject" th:field="*{subject}">
+        </div>
+
+        <div class="form-group">
+          <label for="message">Email Message:</label>
+          <textarea class="form-control" id="message" name="message" rows="6" th:field="*{message}"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Send Email</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer bg-light mt-5">
+  <div class="container">
+    <span class="text-muted">&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

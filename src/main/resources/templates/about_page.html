@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Bank of Kigali Queue Management</title>
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .nav-wrapper {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+        }
+         .brand-logo {
+        margin-left: 20px;
+    }
+        main {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        .about-header {
+            color: #0d47a1;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .about-description {
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+        .about-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .about-details div {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: left;
+        }
+        .about-details div h5 {
+            color: #0d47a1;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .about-details div p {
+            color: #666666;
+            font-size: 16px;
+        }
+        .contact-info {
+            margin-top: 40px;
+        }
+        .contact-info h5 {
+            color: #0d47a1;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .contact-info p {
+            font-size: 16px;
+            color: #333333;
+        }
+        .footer {
+            background-color: #0d47a1;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-wrapper">
+    <a th:href="@{/}" class="brand-logo">
+      <img src="/static/images/1680506194279.ico" alt="Queuequell Logo"> <!-- Replace with your logo path -->
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/service-we-offer}">Services We Offer</a></li>
+      <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdown1">Bank&Admin Portal<i class="material-icons right"></i></a>
+      </li>
+      <li><a th:href="@{/about}">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a th:href="@{/bank-manager/bank_manager_login}">Bank Manager</a></li>
+  <li><a th:href="@{/admin/admin_login}">Sys Admin</a></li>
+</ul>
+
+<main>
+  <h1 class="about-header">About Our Queue Management App</h1>
+  <p class="about-description">
+    Welcome to the Bank of Kigali's queue management system, a revolutionary app designed to streamline your banking experience. Say goodbye to long waits and hello to efficient service management!
+  </p>
+
+  <div class="about-details">
+    <!-- Purpose -->
+    <div>
+      <h5>Purpose</h5>
+      <p>
+        Our app aims to reduce wait times and improve customer satisfaction by allowing users to book their spot in the queue from anywhere. This ensures a seamless and time-saving visit to our branches.
+      </p>
+    </div>
+    <!-- Benefits for Users -->
+    <div>
+      <h5>Benefits for Users</h5>
+      <p>
+        Easily book your place in line, receive email confirmations, and avoid waiting in crowded areas. Our system keeps you informed of service availability and lets you choose the nearest branch depending on your location and most convenient time for your visit.
+      </p>
+    </div>
+    <!-- Benefits for Bank Managers -->
+    <div>
+      <h5>Benefits for Bank Managers</h5>
+      <p>
+        Efficiently manage customer flow, disable unavailable services, and ensure a smooth operation in your branch. Our app provides real-time insights to help you optimize service delivery.
+      </p>
+    </div>
+    <!-- Real-time Updates -->
+    <div>
+      <h5>Real-time Updates</h5>
+      <p>
+        Stay updated with the latest service availability and status. Our app provides real-time notifications and allows you to make informed decisions on your banking needs.
+      </p>
+    </div>
+  </div>
+
+  <!-- Contact Information -->
+  <div class="contact-info">
+    <h5>Contact Us</h5>
+    <p>
+      For any inquiries or support, feel free to contact us at:
+    </p>
+    <p>
+      <strong>Phone:</strong> +250 780850276 <br>
+      <strong>Email:</strong> tonny.shema@gmail.com
+    </p>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</p>
+</footer>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems);
+    });
+</script>
+</body>
+</html>

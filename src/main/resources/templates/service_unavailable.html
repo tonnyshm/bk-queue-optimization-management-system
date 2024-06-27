@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Unavailable</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+      body {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          margin: 0;
+      }
+      main {
+          flex: 1;
+      }
+      .footer {
+          background-color: #0d47a1;
+          color: #ffffff;
+          padding: 20px;
+          text-align: center;
+      }
+      .nav-wrapper {
+          background-color: #0d47a1; /* Bank of Kigali blue */
+      }
+      .brand-logo {
+          margin-left: 20px;
+      }
+      .btn-check-now {
+          background-color: #0d47a1; /* Bank of Kigali blue */
+      }
+      .btn-check-now:hover {
+          background-color: #1565c0; /* Darker shade of blue on hover */
+      }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-wrapper">
+    <a th:href="@{/}" class="brand-logo">
+      <img src="/static/images/1680506194279.ico" alt="Queuequell Logo"> <!-- Replace 'logo.png' with the path to your logo image -->
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/service-we-offer}">Services We Offer</a></li>
+      <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdown1">Bank&Admin Portal<i class="material-icons right"></i></a>
+      </li>
+      <li><a th:href="@{/about}">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a th:href="@{/bank-manager/bank_manager_login}">Bank Manager</a></li>
+  <li><a th:href="@{/admin/admin_login}">Sys Admin</a></li>
+</ul>
+<br>
+<br>
+<main>
+  <div class="container">
+    <h3>Service Unavailable</h3>
+    <p>Sorry, the service you are trying to book is currently unavailable. Please check back later.</p>
+    <a th:href="@{/}" class="btn waves-effect waves-light">Back to Home</a>
+    <a th:href="@{/nearby}" class="btn waves-effect waves-light">Book another service</a>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</p>
+</footer>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems);
+    });
+</script>
+</body>
+</html>

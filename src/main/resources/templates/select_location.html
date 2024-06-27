@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Management App</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        main {
+            flex: 1;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        #map {
+            height: 300px;
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .footer {
+            background-color: #0d47a1;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        .nav-wrapper {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+        }
+        .brand-logo {
+            margin-left: 20px;
+        }
+        .btn-check-now {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+        }
+        .btn-check-now:hover {
+            background-color: #1565c0; /* Darker shade of blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="nav-wrapper">
+        <a th:href="@{/}" class="brand-logo">
+            <img src="/static/images/1680506194279.ico" alt="Queuequell Logo"> <!-- Replace 'logo.png' with the path to your logo image -->
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a href="#">Services We Offer</a></li>
+            <li>
+                <a class="dropdown-trigger" href="#!" data-target="dropdown1">Bank&Admin Portal<i class="material-icons right"></i></a>
+            </li>
+            <li><a th:href="@{/about}">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+    <li><a th:href="@{/bank-manager/bank_manager_login}">Bank Manager</a></li>
+    <li><a th:href="@{/admin/admin_login}">Sys Admin</a></li>
+</ul>
+
+<main>
+    <div class="container">
+        <h2>Queue Management App</h2>
+        <div id="map"></div>
+        <!-- Hidden input fields for latitude and longitude -->
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+        <label for="radius">Radius (in kilometers):</label>
+        <input type="number" id="radius" name="radius" min="1" value="10"> <!-- Hardcoded radius to 50 km -->
+        <button onclick="getNearbyBranches()">Find Nearby Branches</button>
+        <div id="branchList"></div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</p>
+</footer>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems);
+    });
+
+    let map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 0, lng: 0 },
+            zoom: 8,
+        });
+
+        const marker = new google.maps.Marker({
+            map,
+            position: { lat: 0, lng: 0 },
+            draggable: true,
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById('latitude').value = event.latLng.lat();
+            document.getElementById('longitude').value = event.latLng.lng();
+        });
+
+        // Get user's current location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const userLatLng = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                map.setCenter(userLatLng);
+                marker.setPosition(userLatLng);
+                document.getElementById('latitude').value = userLatLng.lat;
+                document.getElementById('longitude').value = userLatLng.lng;
+            }, function(error) {
+                console.error('Error getting user location:', error);
+            });
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }
+
+    function getNearbyBranches() {
+        const latitude = document.getElementById('latitude').value;
+        const longitude = document.getElementById('longitude').value;
+        const radius = document.getElementById('radius').value;
+
+        if (latitude && longitude) {
+            // Redirect to the nearby_branches page with parameters
+            const params = new URLSearchParams({
+                userLatitude: latitude,
+                userLongitude: longitude,
+                radius: radius
+            });
+            window.location.href = `/nearby?${params}`;
+        } else {
+            // Handle error or show message indicating that latitude and longitude are required
+            console.error('Latitude and longitude are required.');
+        }
+    }
+
+    function displayBranches(branches) {
+        const branchList = document.getElementById('branchList');
+        branchList.innerHTML = '';
+
+        if (branches.length === 0) {
+            branchList.innerHTML = '<p>No nearby branches found.</p>';
+            return;
+        }
+
+        const ul = document.createElement('ul');
+        branches.forEach(branch => {
+            const li = document.createElement('li');
+            li.textContent = `${branch.name} - ${branch.address}`;
+            ul.appendChild(li);
+        });
+
+        branchList.appendChild(ul);
+    }
+</script>
+<!-- Add your Google Maps API key -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBAVgHK3UHXtGv1OKwWA_PlEuVkiwQ1TQ&callback=initMap"></script>
+</body>
+</html>
+
+
+

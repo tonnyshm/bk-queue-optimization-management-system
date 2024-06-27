@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offered Services - Bank of Kigali</title>
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .nav-wrapper {
+      background-color: #0d47a1; /* Bank of Kigali blue */
+    }
+     .brand-logo {
+        margin-left: 20px;
+    }
+    .container {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .service-card {
+      background-color: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .service-icon {
+      font-size: 50px;
+      color: #0d47a1;
+    }
+    .service-title {
+      font-size: 24px;
+      color: #333333;
+    }
+    .service-description {
+      font-size: 16px;
+      color: #666666;
+      margin-top: 10px;
+    }
+    .ratings-feedback {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .footer {
+      background-color: #0d47a1;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-wrapper">
+    <a th:href="@{/}" class="brand-logo">
+      <img src="/static/images/1680506194279.ico" alt="Queuequell Logo"><!-- Replace 'logo.png' with the path to your logo image -->
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/service-we-offer}">Services We Offer</a></li>
+      <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdown1">Bank&Admin Portal<i class="material-icons right"></i></a>
+      </li>
+      <li><a th:href="@{/about}">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a th:href="@{/bank-manager/bank_manager_login}">Bank Manager</a></li>
+  <li><a th:href="@{/admin/admin_login}">Sys Admin</a></li>
+</ul>
+
+<main>
+  <div class="container">
+    <!-- Service Cards -->
+    <div class="row">
+      <!-- Current Saving -->
+      <div class="col s12 m6">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="material-icons">Accounts</i>
+          </div>
+          <div class="service-title">Current Saving</div>
+          <div class="service-description">Manage your savings with our reliable and secure deposit and saving options.</div>
+        </div>
+      </div>
+      <!-- Money Exchange -->
+      <div class="col s12 m6">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="material-icons">Forex</i>
+          </div>
+          <div class="service-title">Money Exchange</div>
+          <div class="service-description">Get the best exchange rates for your currency needs, fast and hassle-free.</div>
+        </div>
+      </div>
+      <!-- Technical Support -->
+      <div class="col s12 m6">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="material-icons">Build</i>
+          </div>
+          <div class="service-title">Technical Support</div>
+          <div class="service-description">24/7 technical support to help you with any banking or app-related issues.</div>
+        </div>
+      </div>
+      <!-- Loans -->
+      <div class="col s12 m6">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="material-icons">Borrow</i>
+          </div>
+          <div class="service-title">Loans</div>
+          <div class="service-description">Flexible loan options to meet your personal and business needs.</div>
+        </div>
+      </div>
+      <!-- Mortgage -->
+      <div class="col s12 m6">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="material-icons">Home</i>
+          </div>
+          <div class="service-title">Mortgage</div>
+          <div class="service-description">Affordable mortgage solutions to help you buy your dream home.</div>
+        </div>
+      </div>
+      <!-- Insurance Services -->
+      <div class="col s12 m6">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="material-icons">Security</i>
+          </div>
+          <div class="service-title">Insurance Services</div>
+          <div class="service-description">Comprehensive insurance plans to protect you and your assets.</div>
+        </div>
+      </div>
+      <!-- Card Center -->
+      <div class="col s12 m6">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="material-icons">Cards</i>
+          </div>
+          <div class="service-title">Card Center</div>
+          <div class="service-description">Get assistance with all your card needs, from issuance to management.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ratings and Feedback Section -->
+    <div class="ratings-feedback">
+      <p>We value your feedback. Please rate our services and share your experience.</p>
+      <h5>Rate Our Services</h5>
+      <a class="btn btn-check-now" th:href="@{/ratingForm}" >Rating</a>
+      <!-- Feedback Form or Section (Optional) -->
+      <a class="btn btn-check-now" th:href="@{/feedback}" >Give Feedback</a>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</p>
+</footer>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation</title>
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .success-icon {
+            color: #28a745;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .nav-wrapper {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+        }
+        .brand-logo {
+            margin-left: 20px;
+        }
+        .btn-check-now {
+            background-color: #0d47a1; /* Bank of Kigali blue */
+        }
+        .btn-check-now:hover {
+            background-color: #1565c0; /* Darker shade of blue on hover */
+        }
+        .footer {
+            background-color: #0d47a1;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-wrapper">
+    <a th:href="@{/}" class="brand-logo">
+      <img src="1680506194279.ico" alt="Queuequell Logo"> <!-- Replace 'logo.png' with the path to your logo image -->
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/service-we-offer}"  >Services We Offer</a></li>
+      <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdown1">Bank&Admin Portal<i class="material-icons right"></i></a>
+      </li>
+      <li><a th:href="@{/about}">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a th:href="@{/bank-manager/bank_manager_login}">Bank Manager</a></li>
+  <li><a th:href="@{/admin/admin_login}">Sys Admin</a></li>
+</ul>
+
+<main>
+  <div class="container">
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM6.356 11.646a.5.5 0 0 0 .708 0L8 10.107l1.936 1.94a.5.5 0 1 0 .707-.708L8.707 9.4a.5.5 0 0 0-.707 0L6.356 11.646z"/>
+      </svg>
+    </div>
+    <h1>Booking Confirmed</h1>
+    <p>Your spot in the queue has been successfully booked.</p>
+    <p>Please wait for your turn.</p>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</p>
+</footer>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems);
+    });
+</script>
+</body>
+</html>

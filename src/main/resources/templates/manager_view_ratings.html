@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager View Ratings</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom styles */
+    .btn-custom {
+      background-color: blue;
+      color: white;
+    }
+    body {
+        background-color: #f0f2f5;
+    }
+    .rating-container {
+        margin-top: 50px;
+    }
+    .rating-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+    .rating-card:hover {
+        transform: scale(1.02);
+    }
+    .rating-card-header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    .rating-card-body {
+        padding: 20px;
+        background-color: #ffffff;
+    }
+    .rating-stars {
+        color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Bank Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Accounts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Transactions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Reports</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" id="logoutButton">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5 rating-container">
+  <h1 class="text-center mb-5">User Ratings</h1>
+  <div class="row">
+    <div th:each="rating : ${ratings}" class="col-md-6 col-lg-4 mb-4">
+      <div class="card rating-card">
+        <div class="card-header rating-card-header">
+          <span th:text="'Rating ID: ' + ${rating.id}"></span>
+          <i class="fas fa-star float-end rating-stars"></i>
+        </div>
+        <div class="card-body rating-card-body">
+          <p><strong>Comment:</strong> <span th:text="${rating.comment}"></span></p>
+          <p><strong>Branch Name:</strong> <span th:text="${rating.branch.bkBranchName}"></span></p>
+          <p><strong>Service:</strong> <span th:text="${rating.branch_Service_offered.name}"></span></p>
+          <p><strong>Rating:</strong>
+            <span th:each="star : ${#numbers.sequence(1, rating.ratingValue)}">
+              <i class="fas fa-star rating-stars"></i>
+            </span>
+          </p>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer bg-light mt-5">
+  <div class="container">
+    <span class="text-muted">&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

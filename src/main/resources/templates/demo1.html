@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Branches</title>
+    <!-- Add any CSS styles here -->
+    <style>
+        /* Add your CSS styles here */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .branch img {
+            width: 100px; /* Adjust size as needed */
+            height: 100px; /* Adjust size as needed */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Nearby Branches</h1>
+    <div id="branchList">
+        <!-- Branches will be dynamically added here -->
+        <div th:each="branch : ${branches}" class="branch">
+            <h3 th:text="${branch.name}">Branch Name</h3>
+            <img th:src="@{${branch.imageUrl}}" alt="Branch Image">
+            <p th:text="${branch.address}">Branch Address</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

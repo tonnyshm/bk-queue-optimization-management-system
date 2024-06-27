@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queue Management</title>
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    /* Hidden pop-up style */
+    #emailPopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      z-index: 9999;
+    }
+    /* Blur effect */
+    #blur {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9998;
+    }
+    /* Button style */
+    .btn {
+      background-color: #2196F3;
+    }
+    .footer {
+      background-color: #0d47a1;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .nav-wrapper {
+      background-color: #0d47a1; /* Bank of Kigali blue */
+    }
+    .brand-logo {
+      margin-left: 20px;
+    }
+    .btn-check-now {
+      background-color: #0d47a1; /* Bank of Kigali blue */
+    }
+    .btn-check-now:hover {
+      background-color: #1565c0; /* Darker shade of blue on hover */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">
+      <img src="/static/images/1680506194279.ico" alt="Queuequell Logo"> <!-- Replace 'logo.png' with the path to your logo image -->
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/service-we-offer}">Services We Offer</a></li>
+      <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdown1">Bank&Admin Portal<i class="material-icons right"></i></a>
+      </li>
+      <li><a th:href="@{/about}">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a th:href="@{/bank-manager/bank_manager_login}">Bank Manager</a></li>
+  <li><a th:href="@{/admin/admin_login}">Sys Admin</a></li>
+</ul>
+
+<main>
+  <h1>Queue Management</h1>
+
+  <!-- Blur effect overlay -->
+  <div id="blur"></div>
+
+  <!-- Pop-up email form using Materialize CSS modal -->
+  <div id="emailPopup" class="modal">
+    <div class="modal-content center-align">
+      <h4>Enter Your Details</h4>
+      <form id="emailForm" action="/book-queue" method="post">
+        <input type="hidden" id="branchId" name="branch" th:value="${branchId}">
+        <div class="input-field">
+          <input id="email" type="email" name="email" class="validate" required>
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field">
+          <select id="serviceSelect" name="service">
+            <option value="" disabled selected>Select Service</option>
+            <!-- Iterate over services to populate dropdown -->
+            <option th:each="service : ${offeredServices}" th:value="${service.id}" th:text="${service.name}"></option>
+          </select>
+          <label>Select Service</label>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <form action="/book-queue" method="post">
+    <table>
+      <thead>
+      <tr>
+        <th>Bank Service</th>
+        <th>Estimated Waiting Time (Min)</th>
+        <th>Queue Size</th>
+        <th>Last Booked Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="service : ${offeredServices}">
+        <td th:text="${service.name}"></td>
+        <td th:text="${queueInfoMap[service.id] != null ? queueInfoMap[service.id].estimatedWaitingHours : '0'}"></td>
+        <td th:text="${queueInfoMap[service.id] != null ? queueInfoMap[service.id].queueSize : '0'}"></td>
+        <td th:text="${queueInfoMap[service.id] != null ? queueInfoMap[service.id].estimatedTime != null ? queueInfoMap[service.id].estimatedTime : 'N/A' : 'N/A'}"></td>
+      </tr>
+      </tbody>
+    </table>
+    <br>
+    <!-- Button to trigger the pop-up -->
+    <button id="bookButton" class="btn waves-effect waves-light" type="button">Book Your Place</button>
+  </form>
+  <br>
+
+  <!-- Button to cancel the appointment -->
+  <button id="cancelButton" class="btn waves-effect waves-light red" type="button">Cancel Appointment</button>
+  <!-- Cancel Appointment Popup -->
+  <div id="cancelPopup" class="modal">
+    <div class="modal-content center-align">
+      <h4>Cancel Appointment</h4>
+      <form id="cancelForm" action="/cancel-appointment" method="post">
+        <div class="input-field">
+          <input id="ticketNumber" type="text" name="ticketNumber" class="validate" required>
+          <label for="ticketNumber">Enter Ticket Number</label>
+        </div>
+        <button class="btn waves-effect waves-light red" type="submit" name="action">Cancel</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</p>
+</footer>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- JavaScript to enable Materialize components and blur effect -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modals = document.querySelectorAll('.modal');
+    M.Modal.init(modals);
+
+    // Blur effect
+    var bookButton = document.getElementById('bookButton');
+    var emailPopup = document.getElementById('emailPopup');
+    var blurOverlay = document.getElementById('blur');
+
+    bookButton.addEventListener('click', function() {
+      emailPopup.style.display = 'block';
+      blurOverlay.style.display = 'block';
+      emailPopup.classList.toggle('blur');
+      blurOverlay.classList.toggle('blur');
+    });
+
+    // Close the form popup when clicking outside of it
+    blurOverlay.addEventListener('click', function() {
+      emailPopup.style.display = 'none';
+      blurOverlay.style.display = 'none';
+      emailPopup.classList.remove('blur');
+      blurOverlay.classList.remove('blur');
+    });
+
+    // Prevent closing the form popup when clicking inside it
+    emailPopup.addEventListener('click', function(event) {
+      event.stopPropagation();
+    });
+
+    // Initialize Materialize Select dropdown
+    var serviceSelect = document.getElementById('serviceSelect');
+    M.FormSelect.init(serviceSelect);
+  });
+</script>
+
+<!-- JavaScript for cancel appointment popup -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var cancelPopup = document.getElementById('cancelPopup');
+    var cancelButton = document.getElementById('cancelButton');
+
+    var instances = M.Modal.init(cancelPopup);
+
+    cancelButton.addEventListener('click', function() {
+      instances.open();
+    });
+  });
+</script>
+
+</body>
+</html>
