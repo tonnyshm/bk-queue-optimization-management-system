@@ -6,159 +6,162 @@
   <title>Branch Statistics</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Bank Manager</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" th:href="@{/bank-manager/bank_manager/home}" >Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Accounts</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Transactions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Reports</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Settings</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" id="logoutButton" href="/logout">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Bank Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/bank-manager/bank_manager/home}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Accounts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Transactions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Reports</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" id="logoutButton" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-  <div class="container mt-5">
-    <h1>Branch Statistics</h1>
-    <p>Branch Name: <span th:text="${branchName}">Branch Name</span></p>
-    <p>Manager: <span th:text="${managerUsername}">Manager Username</span></p>
+<div class="container mt-5">
+  <h1>Branch Statistics</h1>
+  <p>Branch Name: <span th:text="${branchName}">Branch Name</span></p>
+  <p>Manager: <span th:text="${managerUsername}">Manager Username</span></p>
 
-    <div class="row">
-      <!-- Daily Visitors Card -->
-      <div class="col-md-4">
-        <div class="card text-white bg-primary mb-3">
-          <div class="card-header">Daily Visitors</div>
-          <div class="card-body">
-            <h5 class="card-title" th:text="${dailyVisitors}">0</h5>
-          </div>
-        </div>
-      </div>
-
-      <!-- Total Ratings Card -->
-      <div class="col-md-4">
-        <div class="card text-white bg-success mb-3">
-          <div class="card-header">Total Ratings</div>
-          <div class="card-body">
-            <h5 class="card-title" th:text="${totalRatings}">0</h5>
-          </div>
-        </div>
-      </div>
-
-      <!-- Total Feedbacks Card -->
-      <div class="col-md-4">
-        <div class="card text-white bg-warning mb-3">
-          <div class="card-header">Total Feedbacks</div>
-          <div class="card-body">
-            <h5 class="card-title" th:text="${totalFeedbacks}">0</h5>
-          </div>
+  <div class="row">
+    <!-- Daily Visitors Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Daily Visitors</div>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${dailyVisitors}">0</h5>
         </div>
       </div>
     </div>
 
-    <!-- Most Sought Services Chart -->
-    <div class="card mb-3">
-      <div class="card-header">Most Sought Services</div>
-      <div class="card-body">
-        <canvas id="servicesChart"></canvas>
+    <!-- Total Ratings Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Total Ratings</div>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${totalRatings}">0</h5>
+        </div>
       </div>
     </div>
 
-    <!-- Peak Hours Chart -->
-    <div class="card mb-3">
-      <div class="card-header">Peak Hours</div>
-      <div class="card-body">
-        <canvas id="peakHoursChart"></canvas>
+    <!-- Total Feedbacks Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Total Feedbacks</div>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${totalFeedbacks}">0</h5>
+        </div>
       </div>
     </div>
   </div>
 
-  <footer class="footer bg-light mt-5">
-    <div class="container">
-      <span class="text-muted">&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</span>
+  <!-- Most Sought Services Chart -->
+  <div class="card mb-3">
+    <div class="card-header">Most Sought Services</div>
+    <div class="card-body">
+      <canvas id="servicesChart"></canvas>
     </div>
-  </footer>
+  </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const mostSoughtServices = /*[[${mostSoughtServices}]]*/ {};
-        const peakHours = /*[[${peakHours}]]*/ [];
+  <!-- Peak Hours Chart -->
+  <div class="card mb-3">
+    <div class="card-header">Peak Hours</div>
+    <div class="card-body">
+      <canvas id="peakHoursChart"></canvas>
+    </div>
+  </div>
+</div>
 
-        // Most Sought Services Chart
-        const servicesChartCtx = document.getElementById('servicesChart').getContext('2d');
-        const servicesChart = new Chart(servicesChartCtx, {
-            type: 'bar',
-            data: {
-                labels: Object.keys(mostSoughtServices),
-                datasets: [{
-                    label: 'Service Count',
-                    data: Object.values(mostSoughtServices),
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
+<footer class="footer bg-light mt-5">
+  <div class="container">
+    <span class="text-muted">&copy; 2024 KABANZA SHEMA TONNY (AUCA UNIVERSITY). All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript for Charts -->
+<script th:inline="javascript">
+  $(document).ready(function() {
+    // Fetch data from Thymeleaf variables
+    var mostSoughtServicesData = /*[[${mostSoughtServices}]]*/ {};
+    var peakHoursData = /*[[${peakHours}]]*/ [];
+
+    // Most Sought Services Chart
+    var servicesChartCtx = document.getElementById('servicesChart').getContext('2d');
+    var servicesChart = new Chart(servicesChartCtx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(mostSoughtServicesData),
+        datasets: [{
+          label: 'Service Count',
+          data: Object.values(mostSoughtServicesData),
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
             }
-        });
-
-        // Peak Hours Chart
-        const peakHoursLabels = peakHours.map(ph => `${ph[0]}:00 - ${ph[0]}:59`);
-        const peakHoursData = peakHours.map(ph => ph[1]);
-        const peakHoursChartCtx = document.getElementById('peakHoursChart').getContext('2d');
-        const peakHoursChart = new Chart(peakHoursChartCtx, {
-            type: 'line',
-            data: {
-                labels: peakHoursLabels,
-                datasets: [{
-                    label: 'Visitors Count',
-                    data: peakHoursData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
+          }]
+        }
+      }
     });
+
+    // Peak Hours Chart
+    var peakHoursLabels = peakHoursData.map(function(ph) { return ph[0] + ':00 - ' + ph[0] + ':59'; });
+    var peakHoursVisitors = peakHoursData.map(function(ph) { return ph[1]; });
+    var peakHoursChartCtx = document.getElementById('peakHoursChart').getContext('2d');
+    var peakHoursChart = new Chart(peakHoursChartCtx, {
+      type: 'line',
+      data: {
+        labels: peakHoursLabels,
+        datasets: [{
+          label: 'Visitors Count',
+          data: peakHoursVisitors,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  });
 </script>
-  </body>
+</body>
 </html>

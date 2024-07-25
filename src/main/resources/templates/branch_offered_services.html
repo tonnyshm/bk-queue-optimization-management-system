@@ -10,6 +10,55 @@
 </head>
 <body>
 
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branch Services</title>
+  <!-- Materialize CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+
+<div class="container">
+  <h2>Bank Branch Services</h2>
+  <!-- Form for adding new service -->
+  <form action="#" th:action="@{/branch_services}" th:object="${BranchServiceOffered}" method="post">
+    <div class="input-field">
+      <input type="text" id="branchserviceName" name="name" th:field="*{name}" required>
+      <label for="branchserviceName">Service Name</label>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit">Add Service
+      <i class="material-icons right">add</i>
+    </button>
+  </form>
+
+  <!-- List of services -->
+  <ul class="collection with-header">
+    <li class="collection-header"><h4>Bank Services Offered</h4></li>
+    <!-- Iterate over the list of services -->
+    <li class="collection-item" th:each="service : ${services}">
+      <span th:text="${service.name}"></span>
+      <!-- Form for deleting service -->
+      <form th:action="@{/branch_services/delete}" th:object="${BranchServiceOffered}" method="post" style="display: inline;">
+        <input type="hidden" name="id" th:value="${service.id}">
+        <button class="btn-small red waves-effect waves-light" type="submit">
+          <i class="material-icons">delete</i>
+        </button>
+      </form>
+    </li>
+  </ul>
+</div>
+
+
+
+<!-- Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
 
 <div class="container">
   <h2>Bank Branch Services</h2>

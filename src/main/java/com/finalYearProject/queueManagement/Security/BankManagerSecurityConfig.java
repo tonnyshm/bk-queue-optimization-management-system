@@ -42,7 +42,7 @@ public class BankManagerSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/bank-manager/bank_manager_login")
                 .loginProcessingUrl("/bank-manager/perform_login")
                 .defaultSuccessUrl("/bank-manager/bank_manager/home", true)
-                .failureUrl("/bank_manager_login?error=true")
+                .failureUrl("/bank-manager/bank_manager_login?error=true")
                 .permitAll()
                 .and()
                 .logout()

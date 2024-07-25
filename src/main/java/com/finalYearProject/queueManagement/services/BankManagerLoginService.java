@@ -74,4 +74,5 @@ public class BankManagerLoginService {
         bankManagerRepository.save(manager);
     }
 
+
 }

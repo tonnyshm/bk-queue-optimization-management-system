@@ -28,7 +28,9 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**","/images/**", "/favicon.ico","/admin_signup",
                         "/templates/1680506194279.ico","/feedback","/admin/ratings-feedbacks").permitAll()
                 .antMatchers("/admin/system_admin/home","/admin/pause/services",
-                        "/admin/statistics","/admin/admin_read_feedbacks","/admin/admin_view_ratings","/admin/bank_manager_signup", "/admin/bkbranch_services","/admin/Registerbranches","/admin/sendEmailsForm").authenticated()
+                        "/admin/statistics","/admin/admin_read_feedbacks","/admin/admin_view_ratings",
+                        "/admin/bank_manager_signup", "/admin/bkbranch_services",
+                        "/admin/Registerbranches","/admin/sendEmailsForm","/admin/report").authenticated()
                 .anyRequest().hasRole("ADMIN")
                 .and()
                 .formLogin()

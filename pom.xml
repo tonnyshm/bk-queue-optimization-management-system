@@ -97,6 +97,7 @@
 			<version>5.5.13.2</version>
 		</dependency>
 
+		<!-- iText for PDF generation -->
 	</dependencies>
 
 

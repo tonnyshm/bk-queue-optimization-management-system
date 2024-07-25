@@ -47,6 +47,9 @@ public interface BookUserInfoRepo extends JpaRepository<BookedUserInfo, Long> {
     List<Object[]> findPeakHours();
 
     long countByUserVisitedDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+
+    List<BookedUserInfo> findByUserVisitedDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+
 }
 
 
