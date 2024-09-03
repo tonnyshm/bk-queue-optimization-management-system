@@ -9,8 +9,8 @@
 **Technologies**
 -------------------------------------------------------------------------------------------------
 
-   .Spring Boot
-   .Spring MVC
+   .Spring Boot 
+   .Spring MVC 
    .Spring Security
    .Maven
    .Thymleaf
